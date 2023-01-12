@@ -98,7 +98,7 @@ codeunit 50140 "FPFr Subscription Management"
                         NewBlanketOrderSalesLine.Validate("Shipment Date", CalcDate(BlanketOrderSalesLine."Subscription Periodicity", BlanketOrderSalesLine."Shipment Date"));
                         NewBlanketOrderSalesLine.Validate("Subscription Type", BlanketOrderSalesLine."Subscription Type");
                         NewBlanketOrderSalesLine.Validate("Subscription Periodicity", BlanketOrderSalesLine."Subscription Periodicity");
-                        NewBlanketOrderSalesLine.MODIFY(true);
+                        NewBlanketOrderSalesLine.Modify(true);
                     end;
                 end;
             until BlanketOrderSalesLine.Next() = 0;
