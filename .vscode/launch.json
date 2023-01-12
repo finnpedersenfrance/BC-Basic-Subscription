@@ -9,7 +9,7 @@
             "server": "https://winserv2019bc.northeurope.cloudapp.azure.com",
             "serverInstance": "BC",
             "authentication": "UserPassword",
-            "startupObjectId": 50144,
+            "startupObjectId": 31,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,

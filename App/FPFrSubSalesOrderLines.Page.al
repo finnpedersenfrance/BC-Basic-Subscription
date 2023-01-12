@@ -5,6 +5,7 @@ Page 50140 "FPFr Sub. Sales Order Lines"
     SourceTable = "Sales Line";
     SourceTableView = where("Document Type" = const("Blanket Order"),
                             "Subscription Type" = filter(Recurring | Stop));
+    UsageCategory = None;
 
     layout
     {

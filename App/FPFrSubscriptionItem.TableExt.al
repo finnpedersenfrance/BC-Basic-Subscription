@@ -2,11 +2,9 @@ TableExtension 50140 "FPFr Subscription Item" extends Item
 {
     fields
     {
-        field(50000; "Subscription Type"; Option)
+        field(50000; "Subscription Type"; Enum "FPFr Subscription Enum")
         {
             Caption = 'Subscription Type';
-            OptionMembers = " ","Recurring","Stop";
-            OptionCaption = ' ,Recurring,Stop';
 
             trigger OnValidate()
             begin
