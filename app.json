@@ -1,0 +1,33 @@
+{
+  "id": "b5c35302-8296-4e12-a20c-affc5df54af1",
+  "name": "BC Basic Subscription",
+  "publisher": "Finn Pedersen France",
+  "version": "1.0.0.0",
+  "brief": "Basic Subscription Management",
+  "description": "Some items are subscriptions and it is setup in Blanket Sales",
+  "privacyStatement": "https://finnpedersenkazes.github.io/",
+  "EULA": "https://finnpedersenkazes.github.io/",
+  "help": "https://finnpedersenkazes.github.io/",
+  "url": "https://finnpedersenkazes.github.io/",
+  "logo": "Logo.png",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "21.0.0.0",
+  "idRanges": [
+    {
+      "from": 50140,
+      "to": 50149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "contextSensitiveHelpUrl": "https://finnpedersenkazes.github.io/",
+  "runtime": "10.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
