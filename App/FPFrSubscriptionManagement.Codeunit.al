@@ -62,11 +62,9 @@ codeunit 50140 "FPFr Subscription Management"
         BlanketOrderSalesLine: Record "Sales Line";
         NewBlanketOrderSalesLine: Record "Sales Line";
         ExistsBlanketOrderSalesLine: Record "Sales Line";
-        NextLineNumber: Integer;
 
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");
-        NextLineNumber := 0;
 
         BlanketOrderSalesLine.Reset();
         BlanketOrderSalesLine.SetRange("Document Type", SalesHeader."Document Type");
@@ -87,7 +85,7 @@ codeunit 50140 "FPFr Subscription Management"
                         NewBlanketOrderSalesLine.Init();
                         NewBlanketOrderSalesLine."Document Type" := BlanketOrderSalesLine."Document Type";
                         NewBlanketOrderSalesLine."Document No." := BlanketOrderSalesLine."Document No.";
-                        NewBlanketOrderSalesLine."Line No." := GetNextLineNumber(SalesHeader, NextLineNumber);
+                        NewBlanketOrderSalesLine."Line No." := GetNextLineNumber(SalesHeader);
                         NewBlanketOrderSalesLine.Insert(true);
                         NewBlanketOrderSalesLine.Validate(Type, BlanketOrderSalesLine.Type);
                         NewBlanketOrderSalesLine.Validate("No.", BlanketOrderSalesLine."No.");
@@ -104,20 +102,18 @@ codeunit 50140 "FPFr Subscription Management"
             until BlanketOrderSalesLine.Next() = 0;
     end;
 
-    local procedure GetNextLineNumber(SalesHeader: Record "Sales Header"; var NextLineNumber: Integer): Integer;
+    local procedure GetNextLineNumber(SalesHeader: Record "Sales Header"): Integer;
     var
         SalesLine: Record "Sales Line";
+        NextLineNumber: Integer;
     begin
-        if NextLineNumber <= 0 then begin
-            SalesLine.Reset();
-            SalesLine.SetRange("Document Type", SalesHeader."Document Type");
-            SalesLine.SetRange("Document No.", SalesHeader."No.");
-            if SalesLine.FindLast() then
-                NextLineNumber := SalesLine."Line No." + 10000
-            else
-                NextLineNumber := 0;
-        end;
-        NextLineNumber := NextLineNumber + 10000;
+        SalesLine.Reset();
+        SalesLine.SetRange("Document Type", SalesHeader."Document Type");
+        SalesLine.SetRange("Document No.", SalesHeader."No.");
+        if SalesLine.FindLast() then
+            NextLineNumber := SalesLine."Line No." + 10000
+        else
+            NextLineNumber := 10000;
         exit(NextLineNumber);
     end;
 }
