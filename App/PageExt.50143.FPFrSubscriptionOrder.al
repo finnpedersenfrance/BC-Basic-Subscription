@@ -30,10 +30,9 @@ PageExtension 50143 "FPFr Subscription Order" extends "Blanket Sales Order"
 
                     trigger OnAction()
                     var
-                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        FPFrSubscriptionManagement: Codeunit "FPFr Subscription Management";
                     begin
-                        if ApprovalsMgmt.PrePostApprovalCheckSales(Rec) then
-                            Codeunit.Run(Codeunit::"Blnkt Sales Ord. to Ord. (Y/N)", Rec);
+                        FPFrSubscriptionManagement.MakeOrderYN(Rec);
                     end;
                 }
                 action("Calculate Next Subscription Period")

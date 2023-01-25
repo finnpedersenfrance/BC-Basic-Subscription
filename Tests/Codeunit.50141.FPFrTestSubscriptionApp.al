@@ -37,7 +37,9 @@ codeunit 50141 "FPFr Test Subscription App"
         SalesHeader: Record "Sales Header";
         SalesLine: Record "Sales Line";
         FPFrSubscriptionEnum: Enum "FPFr Subscription Enum";
+        FPFrSubscriptionMgt: Codeunit "FPFr Subscription Management";
         DateExpression: DateFormula;
+        LineNumber: Integer;
 
     begin
         // [SCENARIO #001] Subscription Item
@@ -47,20 +49,19 @@ codeunit 50141 "FPFr Test Subscription App"
 
         Item.FindFirst();
         Item.Validate("Subscription Type", Item."Subscription Type"::Recurring);
-        if not Evaluate(DateExpression, '<1D>') then
-            Error('Could not evaluate "%1".', '<1D>');
-        Item.Validate("Subscription Periodicity", DateExpression);
-        if not Evaluate(DateExpression, '<-1D>') then
-            Error('Could not evaluate "%1".', '<-1D>');
+        Evaluate(DateExpression, '<1D>');
+        Assert.AreEqual('1D', Format(DateExpression), 'Test evaluate of <1D>.');
 
+        Item.Validate("Subscription Periodicity", DateExpression);
+        Evaluate(DateExpression, '<-1D>');
+        Assert.AreEqual('-1D', Format(DateExpression), 'Test evaluate of <-1D>.');
+        // Will calculate a date in the past which is not allowed and the validate is expected to fail.
         asserterror Item.Validate("Subscription Periodicity", DateExpression);
 
         Item.Validate("Subscription Type", Item."Subscription Type"::" ");
-        if not Evaluate(DateExpression, '') then
-            Error('Could not evaluate "%1".', '');
+        Evaluate(DateExpression, '');
         Item.Validate("Subscription Type", Item."Subscription Type"::Recurring);
-        if not Evaluate(DateExpression, '') then
-            Error('Could not evaluate "%1".', '');
+        Evaluate(DateExpression, '');
         Item.Modify(true);
 
         SalesHeader.Validate("Document Type", SalesHeader."Document Type"::"Blanket Order");
@@ -72,11 +73,53 @@ codeunit 50141 "FPFr Test Subscription App"
         SalesLine.Init();
         SalesLine.Validate("Document Type", SalesHeader."Document Type");
         SalesLine.Validate("Document No.", SalesHeader."No.");
-        SalesLine.Validate("Line No.", 10000);
+        LineNumber := FPFrSubscriptionMgt.GetNextLineNumber(SalesHeader);
+        SalesLine.Validate("Line No.", LineNumber);
         SalesLine.Insert(true);
         SalesLine.Validate(Type, SalesLine.Type::Item);
         SalesLine.Validate("No.", Item."No.");
         SalesLine.Validate(Quantity, 1);
         SalesLine.Modify(true);
+
+        SalesLine.Init();
+        SalesLine.Validate("Document Type", SalesHeader."Document Type");
+        SalesLine.Validate("Document No.", SalesHeader."No.");
+        LineNumber := FPFrSubscriptionMgt.GetNextLineNumber(SalesHeader);
+        SalesLine.Validate("Line No.", LineNumber);
+        SalesLine.Insert(true);
+        SalesLine.Validate(Type, SalesLine.Type::Item);
+        SalesLine.Validate("No.", Item."No.");
+        SalesLine.Validate(Quantity, 1);
+
+        Evaluate(DateExpression, '<-1D>');
+        // Will calculate a date in the past which is not allowed and the validate is expected to fail.
+        asserterror SalesLine.Validate("Subscription Periodicity", DateExpression);
+
+        Evaluate(DateExpression, '<1D>');
+        SalesLine.Validate("Subscription Periodicity", DateExpression);
+
+        SalesLine.Validate("Subscription Type", SalesLine."Subscription Type"::" ");
+        SalesLine.Validate("Subscription Type", SalesLine."Subscription Type"::Stop);
+        SalesLine.Modify(true);
+
+        FPFrSubscriptionMgt.CalculateQuantityToShipYN(SalesHeader);
+        FPFrSubscriptionMgt.MakeOrderYN(SalesHeader);
+        FPFrSubscriptionMgt.CalculateNextSubscriptionPeriodYN(SalesHeader);
     end;
+
+
+
+    [ConfirmHandler]
+    procedure ConfirmHandler(Question: Text[1024]; var Reply: Boolean);
+    begin
+
+        Reply := true;
+    end;
+
+    [MessageHandler]
+    procedure MessageHandler(MessageText: Text[1024])
+    begin
+
+    end;
+
 }

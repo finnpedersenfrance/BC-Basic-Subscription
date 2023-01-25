@@ -5,11 +5,20 @@ codeunit 50140 "FPFr Subscription Management"
 
     end;
 
-    [EventSubscriber(ObjectType::Table, 37, 'OnAfterCopyFromItem', '', true, true)]
+    [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnAfterCopyFromItem', '', true, true)]
     local procedure SubscriptionOnAfterCopyFromItem(var SalesLine: Record "Sales Line"; Item: Record Item)
     begin
         SalesLine."Subscription Type" := Item."Subscription Type";
         SalesLine."Subscription Periodicity" := Item."Subscription Periodicity";
+    end;
+
+
+    procedure MakeOrderYN(SalesHeader: Record "Sales Header")
+    var
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+    begin
+        if ApprovalsMgmt.PrePostApprovalCheckSales(SalesHeader) then
+            Codeunit.Run(Codeunit::"Blnkt Sales Ord. to Ord. (Y/N)", SalesHeader);
     end;
 
     procedure CalculateQuantityToShipYN(SalesHeader: Record "Sales Header")
@@ -102,7 +111,7 @@ codeunit 50140 "FPFr Subscription Management"
             until BlanketOrderSalesLine.Next() = 0;
     end;
 
-    local procedure GetNextLineNumber(SalesHeader: Record "Sales Header"): Integer;
+    procedure GetNextLineNumber(SalesHeader: Record "Sales Header"): Integer;
     var
         SalesLine: Record "Sales Line";
         NextLineNumber: Integer;

@@ -20,11 +20,8 @@ TableExtension 50141 "FPFr Subscription Sales Line" extends "Sales Line"
                 DateFormularZero: DateFormula;
                 DateFormulaErr: TextConst ENU = 'The Date Formula %1 will not calculate a date in the future. Please enter a correct Date Formula.';
             begin
-                if Evaluate(DateFormularZero, '') and ("Subscription Periodicity" = DateFormularZero) then
-                    "Subscription Type" := "Subscription Type"::" "
-                else
-                    if not (CalcDate("Subscription Periodicity", WorkDate()) > WorkDate()) then
-                        Error(DateFormulaErr, "Subscription Periodicity");
+                if not (CalcDate("Subscription Periodicity", WorkDate()) > WorkDate()) then
+                    Error(DateFormulaErr, "Subscription Periodicity");
             end;
         }
 
