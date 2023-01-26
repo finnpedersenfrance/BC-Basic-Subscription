@@ -28,11 +28,10 @@ codeunit 50140 "FPFr Subscription Management"
 
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");
-        if not Confirm(ConfirmMsg, false) then
-            exit;
-
-        CalculateQuantityToShipOne(SalesHeader);
-        Message(CalculatedMsg);
+        if Confirm(ConfirmMsg, false) then begin
+            CalculateQuantityToShipOne(SalesHeader);
+            Message(CalculatedMsg);
+        end;
     end;
 
     procedure CalculateQuantityToShipOne(SalesHeader: Record "Sales Header")
@@ -44,7 +43,7 @@ codeunit 50140 "FPFr Subscription Management"
         BlanketOrderSalesLine.Reset();
         BlanketOrderSalesLine.SetRange("Document Type", SalesHeader."Document Type");
         BlanketOrderSalesLine.SetRange("Document No.", SalesHeader."No.");
-        BlanketOrderSalesLine.SetRange("Qty. to Ship", 0);
+        // BlanketOrderSalesLine.SetRange("Qty. to Ship", 0);
         BlanketOrderSalesLine.SetFilter("Shipment Date", '..%1', WorkDate());
         if BlanketOrderSalesLine.FindSet() then
             repeat
@@ -59,11 +58,10 @@ codeunit 50140 "FPFr Subscription Management"
         CalculatedMsg: TextConst ENU = 'Next Subscription periods have been calculated.';
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");
-        if not Confirm(ConfirmMsg, false) then
-            exit;
-
-        CalculateNextSubscriptionPeriodOne(SalesHeader);
-        Message(CalculatedMsg);
+        if Confirm(ConfirmMsg, false) then begin
+            CalculateNextSubscriptionPeriodOne(SalesHeader);
+            Message(CalculatedMsg);
+        end;
     end;
 
     procedure CalculateNextSubscriptionPeriodOne(SalesHeader: Record "Sales Header")

@@ -25,6 +25,13 @@ TableExtension 50141 "FPFr Subscription Sales Line" extends "Sales Line"
             end;
         }
 
+        field(50002; OrderNumber; Code[20])
+        {
+            Editable = false;
+            DataClassification = ToBeClassified;
+
+        }
+
     }
 }
 
