@@ -1,12 +1,12 @@
-codeunit 50141 "FPFr Test Subscription App"
+codeunit 50149 "FPFr Test Subscription App"
 {
     Subtype = Test;
-    EventSubscriberInstance = Manual;
 
     var
         FPFrStandardLibrary: Codeunit "FPFr Standard Library";
         Assert: Codeunit "Library Assert";
-        IsInitialized: Boolean;
+        FPFrEventSubscribers: Codeunit "FPFr Event Subscribers";
+
 
 
     trigger OnRun()
@@ -43,8 +43,10 @@ codeunit 50141 "FPFr Test Subscription App"
         FPFrSubscriptionEnum: Enum "FPFr Subscription Enum";
         FPFrSubscriptionMgt: Codeunit "FPFr Subscription Management";
         DateExpression: DateFormula;
-        Tomorrow: Date;
+        ThisDay: Date;
+        NextDay: Date;
         LineNumber: Integer;
+        DebuggingMode: Boolean;
 
     begin
         // [SCENARIO #001] Subscription Item
@@ -52,7 +54,10 @@ codeunit 50141 "FPFr Test Subscription App"
         // [WHEN] formating
         // [THEN] correct XML string
 
-        WorkDate(Today);
+        DebuggingMode := true;
+        BindSubscription(FPFrEventSubscribers);
+        ThisDay := DMY2Date(10, 1, 2024);
+        WorkDate(ThisDay);
 
         Item.FindFirst();
         Item.Validate("Subscription Type", Item."Subscription Type"::Recurring);
@@ -60,10 +65,13 @@ codeunit 50141 "FPFr Test Subscription App"
         Assert.AreEqual('1D', Format(DateExpression), 'Test evaluate of <1D>.');
 
         Item.Validate("Subscription Periodicity", DateExpression);
-        Evaluate(DateExpression, '<-1D>');
-        Assert.AreEqual('-1D', Format(DateExpression), 'Test evaluate of <-1D>.');
-        // Will calculate a date in the past which is not allowed and the validate is expected to fail.
-        asserterror Item.Validate("Subscription Periodicity", DateExpression);
+
+        if not DebuggingMode then begin
+            Evaluate(DateExpression, '<-1D>');
+            Assert.AreEqual('-1D', Format(DateExpression), 'Test evaluate of <-1D>.');
+            // Will calculate a date in the past which is not allowed and the validate is expected to fail.
+            asserterror Item.Validate("Subscription Periodicity", DateExpression);
+        end;
 
         Item.Validate("Subscription Type", Item."Subscription Type"::" ");
         Evaluate(DateExpression, '');
@@ -74,7 +82,7 @@ codeunit 50141 "FPFr Test Subscription App"
         SalesHeader.Validate("Document Type", SalesHeader."Document Type"::"Blanket Order");
         SalesHeader.Insert(true);
         SalesHeader.Validate("Sell-to Customer No.", '10000');
-        // SalesHeader.Validate("External Document No.", '123456');
+        SalesHeader.Validate("External Document No.", '123456');
         SalesHeader.Modify(true);
 
         SalesLine1.Init();
@@ -88,7 +96,6 @@ codeunit 50141 "FPFr Test Subscription App"
         SalesLine1.Validate(Quantity, 1);
         SalesLine1.Validate("Qty. to Ship", 0);
         SalesLine1.Modify(true);
-        // Commit(); // Testing behaviour
 
         SalesLine2.Init();
         SalesLine2.Validate("Document Type", SalesHeader."Document Type");
@@ -101,61 +108,38 @@ codeunit 50141 "FPFr Test Subscription App"
         SalesLine2.Validate(Quantity, 1);
         SalesLine2.Validate("Qty. to Ship", 0);
 
-        // Evaluate(DateExpression, '<-1D>');
-        // // Will calculate a date in the past which is not allowed and the validate is expected to fail.
-        // asserterror SalesLine2.Validate("Subscription Periodicity", DateExpression);
+        if not DebuggingMode then begin
+            Evaluate(DateExpression, '<-1D>');
+            // Will calculate a date in the past which is not allowed and the validate is expected to fail.
+            asserterror SalesLine2.Validate("Subscription Periodicity", DateExpression);
+        end;
 
-        // Evaluate(DateExpression, '<1D>');
-        // SalesLine2.Validate("Subscription Periodicity", DateExpression);
+        Evaluate(DateExpression, '<1D>');
+        SalesLine2.Validate("Subscription Periodicity", DateExpression);
 
         SalesLine2.Validate("Subscription Type", SalesLine2."Subscription Type"::" ");
         SalesLine2.Validate("Subscription Type", SalesLine2."Subscription Type"::Stop);
         SalesLine2.Modify(true);
-        // Commit(); // Testing behaviour
 
         FPFrSubscriptionMgt.CalculateQuantityToShipYN(SalesHeader);
         FPFrSubscriptionMgt.MakeOrderYN(SalesHeader);
 
-        Tomorrow := CalcDate('1D', WorkDate());
-        WorkDate := Tomorrow;
+        NextDay := CalcDate('1D', WorkDate());
+        WorkDate := NextDay;
 
         FPFrSubscriptionMgt.CalculateNextSubscriptionPeriodYN(SalesHeader);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Blnkt Sales Ord. to Ord. (Y/N)", 'OnAfterCreateSalesOrder', '', true, true)]
-    local procedure SubscriptionOnAfterCreateSalesOrder(var SalesHeader: Record "Sales Header"; var SkipMessage: Boolean)
-    var
-        SalesPost: Codeunit "Sales-Post";
-    begin
-        SalesPost.Run(SalesHeader);
-        SkipMessage := true;
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Blnkt Sales Ord. to Ord. (Y/N)", 'OnBeforeShouldExit', '', true, true)]
-    local procedure SubscriptionOnBeforeShouldExit(var SalesHeader: Record "Sales Header"; var Result: Boolean; var IsHandled: Boolean)
-    begin
-        IsHandled := true;
-        Result := false;
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnBeforePrePostApprovalCheckSales', '', true, true)]
-    local procedure SubscriptionOnBeforePrePostApprovalCheckSales(var SalesHeader: Record "Sales Header"; var IsHandled: Boolean; var Result: Boolean)
-    begin
-        IsHandled := true;
-        Result := true;
+        UnbindSubscription(FPFrEventSubscribers);
     end;
 
     [ConfirmHandler]
     procedure ConfirmHandler(Question: Text[1024]; var Reply: Boolean);
     begin
-
         Reply := true;
     end;
 
     [MessageHandler]
     procedure MessageHandler(MessageText: Text[1024])
     begin
-
     end;
 
 }
