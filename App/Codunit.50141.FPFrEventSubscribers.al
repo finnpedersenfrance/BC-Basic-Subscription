@@ -43,4 +43,10 @@ codeunit 50141 "FPFr Event Subscribers"
         IsHandled := true;
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Blanket Sales Order to Order", 'OnBeforeCheckBlanketOrderLineQuantity', '', true, true)]
+    local procedure SubscriptionOnBeforeCheckBlanketOrderLineQuantity(var BlanketOrderSalesLine: Record "Sales Line"; QuantityOnOrders: Decimal; var IsHandled: Boolean)
+    begin
+        IsHandled := true;
+    end;
+
 }

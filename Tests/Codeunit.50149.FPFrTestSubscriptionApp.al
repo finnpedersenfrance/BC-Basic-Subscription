@@ -36,7 +36,8 @@ codeunit 50149 "FPFr Test Subscription App"
 
     procedure TestSubscriptionItem()
     var
-        Item: Record Item;
+        Item1: Record Item;
+        Item2: Record Item;
         SalesHeader: Record "Sales Header";
         SalesLine1: Record "Sales Line";
         SalesLine2: Record "Sales Line";
@@ -46,6 +47,7 @@ codeunit 50149 "FPFr Test Subscription App"
         ThisDay: Date;
         NextDay: Date;
         LineNumber: Integer;
+        Counter: Integer;
         DebuggingMode: Boolean;
 
     begin
@@ -56,28 +58,34 @@ codeunit 50149 "FPFr Test Subscription App"
 
         DebuggingMode := true;
         BindSubscription(FPFrEventSubscribers);
-        ThisDay := DMY2Date(10, 1, 2024);
+        ThisDay := DMY2Date(1, 1, 2024);
         WorkDate(ThisDay);
 
-        Item.FindFirst();
-        Item.Validate("Subscription Type", Item."Subscription Type"::Recurring);
+        Item1.FindFirst();
+        Item1.Validate("Subscription Type", Item1."Subscription Type"::Recurring);
         Evaluate(DateExpression, '<1D>');
         Assert.AreEqual('1D', Format(DateExpression), 'Test evaluate of <1D>.');
 
-        Item.Validate("Subscription Periodicity", DateExpression);
+        Item1.Validate("Subscription Periodicity", DateExpression);
 
         if not DebuggingMode then begin
             Evaluate(DateExpression, '<-1D>');
             Assert.AreEqual('-1D', Format(DateExpression), 'Test evaluate of <-1D>.');
             // Will calculate a date in the past which is not allowed and the validate is expected to fail.
-            asserterror Item.Validate("Subscription Periodicity", DateExpression);
+            asserterror Item1.Validate("Subscription Periodicity", DateExpression);
         end;
 
-        Item.Validate("Subscription Type", Item."Subscription Type"::" ");
+        Item1.Validate("Subscription Type", Item1."Subscription Type"::" ");
         Evaluate(DateExpression, '');
-        Item.Validate("Subscription Type", Item."Subscription Type"::Recurring);
+        Item1.Validate("Subscription Type", Item1."Subscription Type"::Recurring);
         Evaluate(DateExpression, '');
-        Item.Modify(true);
+        Item1.Modify(true);
+
+        Item2.Next();
+        Item2.Validate("Subscription Type", Item2."Subscription Type"::Recurring);
+        Evaluate(DateExpression, '<1D>');
+        Assert.AreEqual('1D', Format(DateExpression), 'Test evaluate of <1D>.');
+        Item2.Modify(true);
 
         SalesHeader.Validate("Document Type", SalesHeader."Document Type"::"Blanket Order");
         SalesHeader.Insert(true);
@@ -92,7 +100,7 @@ codeunit 50149 "FPFr Test Subscription App"
         SalesLine1.Validate("Line No.", LineNumber);
         SalesLine1.Insert(true);
         SalesLine1.Validate(Type, SalesLine1.Type::Item);
-        SalesLine1.Validate("No.", Item."No.");
+        SalesLine1.Validate("No.", Item1."No.");
         SalesLine1.Validate(Quantity, 1);
         SalesLine1.Validate("Qty. to Ship", 0);
         SalesLine1.Modify(true);
@@ -104,7 +112,7 @@ codeunit 50149 "FPFr Test Subscription App"
         SalesLine2.Validate("Line No.", LineNumber);
         SalesLine2.Insert(true);
         SalesLine2.Validate(Type, SalesLine2.Type::Item);
-        SalesLine2.Validate("No.", Item."No.");
+        SalesLine2.Validate("No.", Item2."No.");
         SalesLine2.Validate(Quantity, 1);
         SalesLine2.Validate("Qty. to Ship", 0);
 
@@ -119,15 +127,18 @@ codeunit 50149 "FPFr Test Subscription App"
 
         SalesLine2.Validate("Subscription Type", SalesLine2."Subscription Type"::" ");
         SalesLine2.Validate("Subscription Type", SalesLine2."Subscription Type"::Stop);
+        SalesLine2.Validate("Subscription Type", SalesLine2."Subscription Type"::Recurring);
         SalesLine2.Modify(true);
 
-        FPFrSubscriptionMgt.CalculateQuantityToShipYN(SalesHeader);
-        FPFrSubscriptionMgt.MakeOrderYN(SalesHeader);
+        for Counter := 1 to 10 do begin
+            FPFrSubscriptionMgt.CalculateQuantityToShipYN(SalesHeader);
+            FPFrSubscriptionMgt.MakeOrderYN(SalesHeader);
+            FPFrSubscriptionMgt.CalculateNextSubscriptionPeriodYN(SalesHeader);
 
-        NextDay := CalcDate('1D', WorkDate());
-        WorkDate := NextDay;
+            ThisDay := CalcDate('1D', ThisDay);
+            WorkDate := ThisDay;
+        end;
 
-        FPFrSubscriptionMgt.CalculateNextSubscriptionPeriodYN(SalesHeader);
         UnbindSubscription(FPFrEventSubscribers);
     end;
 

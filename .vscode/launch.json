@@ -2,15 +2,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Publish",
             "type": "al",
             "request": "launch",
-            "name": "Publish",
             "server": "https://devenvbc.westeurope.cloudapp.azure.com",
             "serverInstance": "BC",
             "authentication": "UserPassword",
             "tenant": "",
             "startupObjectId": 130451,
-            "startupObjectType": "Page"
+            "startupObjectType": "Page",
+            "breakOnError": true,
+            "breakOnRecordWrite": false,
+            "enableSqlInformationDebugger": false,
+            "enableLongRunningSqlStatements": false,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10
         }
     ]
 }
