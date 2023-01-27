@@ -43,7 +43,7 @@ codeunit 50140 "FPFr Subscription Management"
         BlanketOrderSalesLine.Reset();
         BlanketOrderSalesLine.SetRange("Document Type", SalesHeader."Document Type");
         BlanketOrderSalesLine.SetRange("Document No.", SalesHeader."No.");
-        // BlanketOrderSalesLine.SetRange("Qty. to Ship", 0);
+        BlanketOrderSalesLine.SetRange("Qty. to Ship", 0);
         BlanketOrderSalesLine.SetFilter("Shipment Date", '..%1', WorkDate());
         if BlanketOrderSalesLine.FindSet() then
             repeat
