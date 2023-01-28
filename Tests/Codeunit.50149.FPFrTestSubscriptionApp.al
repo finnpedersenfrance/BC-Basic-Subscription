@@ -124,7 +124,7 @@ codeunit 50149 "FPFr Test Subscription App"
         SalesLine2.Validate("No.", Item2."No.");
         SalesLine2.Validate(Quantity, 1);
         SalesLine2.Validate("Qty. to Ship", 0);
-        SalesLine1.Validate("Shipment Date", ThisDay);
+        SalesLine2.Validate("Shipment Date", ThisDay);
 
         if not DebuggingMode then begin
             Evaluate(DateExpression, '<-1D>');
@@ -148,7 +148,7 @@ codeunit 50149 "FPFr Test Subscription App"
             FPFrSubscriptionMgt.CalculateQuantityToShipYN(SalesHeader);
             BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
 
-            // FPFrSubscriptionMgt.MakeOrderYN(SalesHeader);
+            FPFrSubscriptionMgt.MakeOrderYN(SalesHeader);
             SimulatePosting(SalesHeader);
             BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
 

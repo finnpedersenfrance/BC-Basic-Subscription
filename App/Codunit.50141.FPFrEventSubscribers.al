@@ -14,19 +14,6 @@ codeunit 50141 "FPFr Event Subscribers"
             SalesHeader.Modify(true);
         end;
 
-        SalesLine.SetRange("Document Type", SalesHeader."Document Type");
-        SalesLine.SetRange("Document No.", SalesHeader."No.");
-        if SalesLine.FindSet() then
-            repeat
-                if (SalesLine."Qty. to Ship" = 0) and (SalesLine."Qty. to Invoice" = 0) then begin
-                    if (SalesLine."Qty. to Ship" = 0) then
-                        SalesLine.Validate("Qty. to Ship", SalesLine.Quantity);
-                    if SalesLine."Qty. to Invoice" = 0 then
-                        SalesLine.Validate("Qty. to Invoice", SalesLine.Quantity);
-                    SalesLine.Modify(true);
-                end;
-            until SalesLine.Next() = 0;
-
         SalesPost.Run(SalesHeader);
         SkipMessage := true;
     end;
@@ -57,19 +44,18 @@ codeunit 50141 "FPFr Event Subscribers"
         IsHandled := true;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforeCheckHeaderPostingType', '', true, true)]
-    local procedure SubscriptionOnBeforeCheckHeaderPostingType(var SalesHeader: Record "Sales Header"; var IsHandled: Boolean)
-    begin
-        IsHandled := true;
-    end;
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforeCheckHeaderPostingType', '', true, true)]
+    // local procedure SubscriptionOnBeforeCheckHeaderPostingType(var SalesHeader: Record "Sales Header"; var IsHandled: Boolean)
+    // begin
+    //     IsHandled := true;
+    // end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforePostSalesDoc', '', true, true)]
-    local procedure SubscriptionOnBeforePostSalesDoc(var SalesHeader: Record "Sales Header"; CommitIsSuppressed: Boolean; PreviewMode: Boolean; var HideProgressWindow: Boolean; var IsHandled: Boolean)
-    begin
-        HideProgressWindow := true;
-        IsHandled := true;
-    end;
-
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforePostSalesDoc', '', true, true)]
+    // local procedure SubscriptionOnBeforePostSalesDoc(var SalesHeader: Record "Sales Header"; CommitIsSuppressed: Boolean; PreviewMode: Boolean; var HideProgressWindow: Boolean; var IsHandled: Boolean)
+    // begin
+    //     HideProgressWindow := true;
+    //     IsHandled := true;
+    // end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Blanket Sales Order to Order", 'OnBeforeCheckBlanketOrderLineQuantity', '', true, true)]
     local procedure SubscriptionOnBeforeCheckBlanketOrderLineQuantity(var BlanketOrderSalesLine: Record "Sales Line"; QuantityOnOrders: Decimal; var IsHandled: Boolean)
