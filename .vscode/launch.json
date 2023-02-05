@@ -1,22 +1,21 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Publish",
-            "type": "al",
+            "name": "Microsoft cloud sandbox",
             "request": "launch",
-            "server": "https://devenvbc.westeurope.cloudapp.azure.com",
-            "serverInstance": "BC",
-            "authentication": "UserPassword",
-            "tenant": "",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "fpfrbcdev",
             "startupObjectId": 130451,
             "startupObjectType": "Page",
-            "breakOnError": true,
-            "breakOnRecordWrite": false,
-            "enableSqlInformationDebugger": false,
-            "enableLongRunningSqlStatements": false,
-            "longRunningSqlStatementsThreshold": 500,
-            "numberOfSqlStatements": 10
+            "breakOnError": "All",
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true
         }
     ]
 }

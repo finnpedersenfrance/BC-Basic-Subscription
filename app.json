@@ -12,14 +12,8 @@
   "logo": "Logo.png",
   "dependencies": [
     {
-      "id":  "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
-      "name":  "Library Assert",
-      "publisher":  "Microsoft",
-      "version":  "21.0.0.0"
-    },
-    {
-      "id": "b8645f5d-7b63-48aa-97e0-9952e40de39b", 
-      "name": "Standard Library", 
+      "id": "b8645f5d-7b63-48aa-97e0-9952e40de39b",
+      "name": "BC Standard Library",
       "publisher": "Finn Pedersen France",
       "version": "1.0.0.0"
     }

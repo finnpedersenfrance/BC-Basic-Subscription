@@ -4,14 +4,14 @@ codeunit 50149 "FPFr Test Subscription App"
 
     var
         FPFrStandardLibrary: Codeunit "FPFr Standard Library";
-        Assert: Codeunit "Library Assert";
+        Assert: Codeunit "Standard Library Assert";
         FPFrEventSubscribers: Codeunit "FPFr Event Subscribers";
 
 
 
     trigger OnRun()
     begin
-        // [FEATURE] Simple Subscription Management with Blanket Orders 
+        // [FEATURE] Simple Subscription Management with Blanket Orders
     end;
 
     [Test]
