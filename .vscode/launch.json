@@ -10,7 +10,7 @@
             "type": "al",
             "environmentType": "Sandbox",
             "environmentName": "fpfrbcdev2",
-            "startupObjectId": 130451,
+            "startupObjectId": 22, // 130451
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,

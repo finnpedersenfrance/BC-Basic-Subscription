@@ -1,4 +1,4 @@
-codeunit 50149 "FPFr Test Subscription App"
+codeunit 50144 "FPFr Test Subscription App"
 {
     Subtype = Test;
 
