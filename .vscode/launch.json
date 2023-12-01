@@ -9,13 +9,14 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "fpfrbcdev",
+            "environmentName": "fpfrbcdev2",
             "startupObjectId": 130451,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
-            "enableSqlInformationDebugger": true
+            "enableSqlInformationDebugger": true,
+            "schemaUpdateMode": "ForceSync"
         }
     ]
 }
