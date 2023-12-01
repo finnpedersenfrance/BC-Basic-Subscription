@@ -1,4 +1,4 @@
-PageExtension 50144 "FPFr Subscription Orders" extends "Blanket Sales Orders"
+pageextension 50144 "FPFr Subscription Orders" extends "Blanket Sales Orders"
 {
     actions
     {

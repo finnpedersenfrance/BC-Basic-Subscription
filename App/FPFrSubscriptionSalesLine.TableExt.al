@@ -1,4 +1,4 @@
-TableExtension 50141 "FPFr Subscription Sales Line" extends "Sales Line"
+tableextension 50141 "FPFr Subscription Sales Line" extends "Sales Line"
 {
     fields
     {
@@ -17,7 +17,6 @@ TableExtension 50141 "FPFr Subscription Sales Line" extends "Sales Line"
         {
             trigger OnValidate()
             var
-                DateFormularZero: DateFormula;
                 DateFormulaErr: TextConst ENU = 'The Date Formula %1 will not calculate a date in the future. Please enter a correct Date Formula.';
             begin
                 if not (CalcDate("Subscription Periodicity", WorkDate()) > WorkDate()) then

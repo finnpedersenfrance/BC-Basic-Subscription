@@ -1,6 +1,6 @@
-Report 50141 "FPFr Qty to Ship Calc Batch"
+report 50140 "FPFr Next Periode Calc Batch"
 {
-    Caption = 'Calculate Quantity to Ship';
+    Caption = 'Calculate Next Subscription Period';
     ProcessingOnly = true;
     UsageCategory = None;
 
@@ -18,7 +18,7 @@ Report 50141 "FPFr Qty to Ship Calc Batch"
                 WindowDialog.Update(1, "No.");
                 WindowDialog.Update(2, ROUND(Counter / CounterTotal * 10000, 1));
                 Clear(FPFrSubscriptionManagement);
-                FPFrSubscriptionManagement.CalculateQuantityToShipOne("Sales Header");
+                FPFrSubscriptionManagement.CalculateNextSubscriptionPeriodOne("Sales Header");
                 CounterOK := CounterOK + 1;
                 if MarkedOnly then
                     Mark(false);

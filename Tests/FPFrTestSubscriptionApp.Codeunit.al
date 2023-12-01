@@ -41,11 +41,9 @@ codeunit 50144 "FPFr Test Subscription App"
         SalesHeader: Record "Sales Header";
         SalesLine1: Record "Sales Line";
         SalesLine2: Record "Sales Line";
-        FPFrSubscriptionEnum: Enum "FPFr Subscription Enum";
         FPFrSubscriptionMgt: Codeunit "FPFr Subscription Management";
         DateExpression: DateFormula;
         ThisDay: Date;
-        NextDay: Date;
         LineNumber: Integer;
         Counter: Integer;
         DebuggingMode: Boolean;
@@ -81,6 +79,7 @@ codeunit 50144 "FPFr Test Subscription App"
         Item1.Validate("Subscription Periodicity", DateExpression);
         Item1.Modify(true);
 
+        Item2.FindSet();
         Item2.Next();
         Item2.Validate("Subscription Type", Item2."Subscription Type"::Recurring);
         Evaluate(DateExpression, '<1D>');
@@ -155,7 +154,7 @@ codeunit 50144 "FPFr Test Subscription App"
             FPFrSubscriptionMgt.CalculateNextSubscriptionPeriodYN(SalesHeader);
             BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
 
-            ThisDay := CalcDate('1D', ThisDay);
+            ThisDay := CalcDate('<1D>', ThisDay);
             WorkDate(ThisDay);
         end;
 
@@ -189,7 +188,7 @@ codeunit 50144 "FPFr Test Subscription App"
         if SalesLine.FindSet() then
             repeat
                 String := String +
-                    StrSubstNo('Line %1, Date %2, Qty %3, To Ship %4, To inv %5, Shipped %6, Invoiced %6\',
+                    StrSubstNo('Line %1, Date %2, Qty %3, To Ship %4, To inv %5, Shipped %6, Invoiced %7\',
                         SalesLine."Line No.",
                         Format(SalesLine."Shipment Date", 0, 9),
                         SalesLine.Quantity,

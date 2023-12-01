@@ -1,4 +1,4 @@
-Page 50140 "FPFr Sub. Sales Order Lines"
+page 50140 "FPFr Sub. Sales Order Lines"
 {
     Caption = 'Subscription Sales Order Lines';
     PageType = List;

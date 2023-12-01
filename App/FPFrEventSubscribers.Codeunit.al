@@ -5,7 +5,6 @@ codeunit 50141 "FPFr Event Subscribers"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Blnkt Sales Ord. to Ord. (Y/N)", 'OnAfterCreateSalesOrder', '', true, true)]
     local procedure SubscriptionOnAfterCreateSalesOrder(var SalesHeader: Record "Sales Header"; var SkipMessage: Boolean)
     var
-        SalesLine: Record "Sales Line";
         SalesPost: Codeunit "Sales-Post";
     begin
         if not (SalesHeader.Ship and SalesHeader.Invoice) then begin

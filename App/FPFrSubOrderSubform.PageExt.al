@@ -1,4 +1,4 @@
-PageExtension 50142 "FPFr Sub. Order Subform" extends "Blanket Sales Order Subform"
+pageextension 50142 "FPFr Sub. Order Subform" extends "Blanket Sales Order Subform"
 {
     layout
     {

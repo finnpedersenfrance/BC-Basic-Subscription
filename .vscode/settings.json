@@ -2,5 +2,13 @@
     "cSpell.words": [
         "Pedersen"
     ],
-    "al-xml-doc.InitializeALObjectCacheOnStartUp": false
+    "al-xml-doc.InitializeALObjectCacheOnStartUp": false,
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+        "${UICop}",
+        "${CodeCop}"
+    ],
+    "al.backgroundCodeAnalysis": "Project",
+    "al.browser": "Edge",
+    "al.ruleSetPath": "./.vscode/AfterConversion.ruleset.json"
 }

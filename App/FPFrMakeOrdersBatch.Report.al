@@ -1,6 +1,6 @@
-Report 50140 "FPFr Next Periode Calc Batch"
+report 50142 "FPFr Make Orders Batch"
 {
-    Caption = 'Calculate Next Subscription Period';
+    Caption = 'Make Orders from Blanket Order Lines ready to ship';
     ProcessingOnly = true;
     UsageCategory = None;
 
@@ -17,11 +17,12 @@ Report 50140 "FPFr Next Periode Calc Batch"
                 Counter := Counter + 1;
                 WindowDialog.Update(1, "No.");
                 WindowDialog.Update(2, ROUND(Counter / CounterTotal * 10000, 1));
-                Clear(FPFrSubscriptionManagement);
-                FPFrSubscriptionManagement.CalculateNextSubscriptionPeriodOne("Sales Header");
-                CounterOK := CounterOK + 1;
-                if MarkedOnly then
-                    Mark(false);
+                Clear(BlanketSalesOrdertoOrder);
+                if BlanketSalesOrdertoOrder.Run("Sales Header") then begin
+                    CounterOK := CounterOK + 1;
+                    if MarkedOnly then
+                        Mark(false);
+                end;
             end;
 
             trigger OnPostDataItem()
@@ -59,7 +60,7 @@ Report 50140 "FPFr Next Periode Calc Batch"
     }
 
     var
-        FPFrSubscriptionManagement: Codeunit "FPFr Subscription Management";
+        BlanketSalesOrdertoOrder: Codeunit "Blanket Sales Order to Order";
         UpdatingBlanketOrdersLbl: label 'Updating Blanket Orders  #1########## @2@@@@@@@@@@@@@', Comment = '%1 = Order Number; %2 = Counter';
         CounterLbl: label '%1 blanket orders out of a total of %2 have now been evaluated.', Comment = '%1 = Counter; %2 = Counter Total';
         WindowDialog: Dialog;
@@ -71,4 +72,3 @@ Report 50140 "FPFr Next Periode Calc Batch"
     begin
     end;
 }
-

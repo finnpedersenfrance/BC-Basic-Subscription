@@ -1,4 +1,4 @@
-TableExtension 50140 "FPFr Subscription Item" extends Item
+tableextension 50140 "FPFr Subscription Item" extends Item
 {
     fields
     {
@@ -17,7 +17,6 @@ TableExtension 50140 "FPFr Subscription Item" extends Item
         {
             trigger OnValidate()
             var
-                DateFormularZero: DateFormula;
                 DateFormulaErr: TextConst ENU = 'The Date Formula %1 will not calculate a date in the future. Please enter a correct Date Formula.';
             begin
                 if not (CalcDate("Subscription Periodicity", WorkDate()) > WorkDate()) then
