@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Inventory.Item;
+
 pageextension 50141 "FPFr Subscription Item List" extends "Item List"
 {
     layout

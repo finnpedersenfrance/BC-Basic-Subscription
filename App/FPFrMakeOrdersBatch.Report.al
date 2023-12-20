@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+
 report 50142 "FPFr Make Orders Batch"
 {
     Caption = 'Make Orders from Blanket Order Lines ready to ship';

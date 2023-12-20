@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Inventory.Item;
+
 tableextension 50140 "FPFr Subscription Item" extends Item
 {
     fields

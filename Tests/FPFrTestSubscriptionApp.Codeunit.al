@@ -1,10 +1,16 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Inventory.Item;
+using Microsoft.Sales.Document;
+using FinnPedersenFrance.Tools.Library;
+
 codeunit 50144 "FPFr Test Subscription App"
 {
     Subtype = Test;
 
     var
-        FPFrStandardLibrary: Codeunit "FPFr Standard Library";
-        Assert: Codeunit "Standard Library Assert";
+        StandardLibrary: Codeunit "Standard Library";
+        Assert: Codeunit Assert;
         FPFrEventSubscribers: Codeunit "FPFr Event Subscribers";
 
 
@@ -25,9 +31,9 @@ codeunit 50144 "FPFr Test Subscription App"
         // [WHEN] formating
         // [THEN] correct XML string
 
-        Assert.AreEqual('0', FPFrStandardLibrary.XMLFormat(FPFrSubscriptionEnum::" "), '');
-        Assert.AreEqual('1', FPFrStandardLibrary.XMLFormat(FPFrSubscriptionEnum::Recurring), '');
-        Assert.AreEqual('2', FPFrStandardLibrary.XMLFormat(FPFrSubscriptionEnum::Stop), '');
+        Assert.AreEqual('0', StandardLibrary.XMLFormat(FPFrSubscriptionEnum::" "), '');
+        Assert.AreEqual('1', StandardLibrary.XMLFormat(FPFrSubscriptionEnum::Recurring), '');
+        Assert.AreEqual('2', StandardLibrary.XMLFormat(FPFrSubscriptionEnum::Stop), '');
     end;
 
 

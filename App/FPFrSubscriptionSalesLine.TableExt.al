@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+
 tableextension 50141 "FPFr Subscription Sales Line" extends "Sales Line"
 {
     fields

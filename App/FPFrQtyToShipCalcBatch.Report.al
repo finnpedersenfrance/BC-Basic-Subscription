@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+
 report 50141 "FPFr Qty to Ship Calc Batch"
 {
     Caption = 'Calculate Quantity to Ship';

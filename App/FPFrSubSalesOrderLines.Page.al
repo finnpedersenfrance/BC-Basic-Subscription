@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+
 page 50140 "FPFr Sub. Sales Order Lines"
 {
     Caption = 'Subscription Sales Order Lines';

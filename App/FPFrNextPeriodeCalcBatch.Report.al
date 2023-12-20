@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+
 report 50140 "FPFr Next Periode Calc Batch"
 {
     Caption = 'Calculate Next Subscription Period';

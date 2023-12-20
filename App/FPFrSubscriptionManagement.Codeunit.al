@@ -1,3 +1,8 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+using Microsoft.Inventory.Item;
+
 codeunit 50140 "FPFr Subscription Management"
 {
     trigger OnRun()
@@ -15,7 +20,7 @@ codeunit 50140 "FPFr Subscription Management"
 
     procedure MakeOrderYN(SalesHeader: Record "Sales Header")
     var
-        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        ApprovalsMgmt: Codeunit System.Automation."Approvals Mgmt.";
     begin
         if ApprovalsMgmt.PrePostApprovalCheckSales(SalesHeader) then
             Codeunit.Run(Codeunit::"Blnkt Sales Ord. to Ord. (Y/N)", SalesHeader);

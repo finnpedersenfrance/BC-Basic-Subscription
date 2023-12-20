@@ -1,3 +1,8 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+using Microsoft.Sales.Posting;
+
 codeunit 50141 "FPFr Event Subscribers"
 {
     EventSubscriberInstance = Manual;
@@ -24,7 +29,7 @@ codeunit 50141 "FPFr Event Subscribers"
         Result := false;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnBeforePrePostApprovalCheckSales', '', true, true)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::System.Automation."Approvals Mgmt.", 'OnBeforePrePostApprovalCheckSales', '', true, true)]
     local procedure SubscriptionOnBeforePrePostApprovalCheckSales(var SalesHeader: Record "Sales Header"; var IsHandled: Boolean; var Result: Boolean)
     begin
         IsHandled := true;

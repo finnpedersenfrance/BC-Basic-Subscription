@@ -1,3 +1,7 @@
+namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+
+using Microsoft.Sales.Document;
+
 pageextension 50143 "FPFr Subscription Order" extends "Blanket Sales Order"
 {
     actions
