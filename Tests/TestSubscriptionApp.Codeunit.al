@@ -11,7 +11,7 @@ codeunit 50144 "Test Subscription App"
     var
         StandardLibrary: Codeunit "Standard Library";
         Assert: Codeunit Assert;
-        FPFrEventSubscribers: Codeunit "Event Subscribers";
+        EventSubscribers: Codeunit "Event Subscribers";
 
 
 
@@ -23,7 +23,7 @@ codeunit 50144 "Test Subscription App"
     [Test]
     procedure TestXMLFormatEnum()
     var
-        FPFrSubscriptionEnum: Enum "Subscription Enum";
+        SubscriptionEnum: Enum "Subscription Enum";
 
     begin
         // [SCENARIO #001] Formating Enum
@@ -31,9 +31,9 @@ codeunit 50144 "Test Subscription App"
         // [WHEN] formating
         // [THEN] correct XML string
 
-        Assert.AreEqual('0', StandardLibrary.XMLFormat(FPFrSubscriptionEnum::" "), '');
-        Assert.AreEqual('1', StandardLibrary.XMLFormat(FPFrSubscriptionEnum::Recurring), '');
-        Assert.AreEqual('2', StandardLibrary.XMLFormat(FPFrSubscriptionEnum::Stop), '');
+        Assert.AreEqual('0', StandardLibrary.XMLFormat(SubscriptionEnum::" "), '');
+        Assert.AreEqual('1', StandardLibrary.XMLFormat(SubscriptionEnum::Recurring), '');
+        Assert.AreEqual('2', StandardLibrary.XMLFormat(SubscriptionEnum::Stop), '');
     end;
 
 
@@ -47,7 +47,7 @@ codeunit 50144 "Test Subscription App"
         SalesHeader: Record "Sales Header";
         SalesLine1: Record "Sales Line";
         SalesLine2: Record "Sales Line";
-        FPFrSubscriptionMgt: Codeunit "Subscription Management";
+        SubscriptionManagement: Codeunit "Subscription Management";
         DateExpression: DateFormula;
         ThisDay: Date;
         LineNumber: Integer;
@@ -62,7 +62,7 @@ codeunit 50144 "Test Subscription App"
         // [THEN] correct XML string
 
         DebuggingMode := true;
-        BindSubscription(FPFrEventSubscribers);
+        BindSubscription(EventSubscribers);
         ThisDay := DMY2Date(1, 1, 2024);
         WorkDate(ThisDay);
 
@@ -104,7 +104,7 @@ codeunit 50144 "Test Subscription App"
         SalesLine1.Init();
         SalesLine1.Validate("Document Type", SalesHeader."Document Type");
         SalesLine1.Validate("Document No.", SalesHeader."No.");
-        LineNumber := FPFrSubscriptionMgt.GetNextLineNumber(SalesHeader);
+        LineNumber := SubscriptionManagement.GetNextLineNumber(SalesHeader);
         SalesLine1.Validate("Line No.", LineNumber);
         SalesLine1.Insert(true);
         SalesLine1.Validate(Type, SalesLine1.Type::Item);
@@ -122,7 +122,7 @@ codeunit 50144 "Test Subscription App"
         SalesLine2.Init();
         SalesLine2.Validate("Document Type", SalesHeader."Document Type");
         SalesLine2.Validate("Document No.", SalesHeader."No.");
-        LineNumber := FPFrSubscriptionMgt.GetNextLineNumber(SalesHeader);
+        LineNumber := SubscriptionManagement.GetNextLineNumber(SalesHeader);
         SalesLine2.Validate("Line No.", LineNumber);
         SalesLine2.Insert(true);
         SalesLine2.Validate(Type, SalesLine2.Type::Item);
@@ -150,21 +150,21 @@ codeunit 50144 "Test Subscription App"
         BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
 
         for Counter := 1 to 10 do begin
-            FPFrSubscriptionMgt.CalculateQuantityToShipYN(SalesHeader);
+            SubscriptionManagement.CalculateQuantityToShipYN(SalesHeader);
             BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
 
-            FPFrSubscriptionMgt.MakeOrderYN(SalesHeader);
+            SubscriptionManagement.MakeOrderYN(SalesHeader);
             SimulatePosting(SalesHeader);
             BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
 
-            FPFrSubscriptionMgt.CalculateNextSubscriptionPeriodYN(SalesHeader);
+            SubscriptionManagement.CalculateNextSubscriptionPeriodYN(SalesHeader);
             BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
 
             ThisDay := CalcDate('<1D>', ThisDay);
             WorkDate(ThisDay);
         end;
 
-        UnbindSubscription(FPFrEventSubscribers);
+        UnbindSubscription(EventSubscribers);
     end;
 
     procedure SimulatePosting(SalesHeader: Record "Sales Header")
@@ -187,6 +187,8 @@ codeunit 50144 "Test Subscription App"
     var
         SalesLine: Record "Sales Line";
         String: Text;
+        StatusTxt: Label 'Line %1, Date %2, Qty %3, To Ship %4, To inv %5, Shipped %6, Invoiced %7',
+               Comment = '%1 = Line No., %2 = Date, %3 = Quantity, %4 = Qty. to Ship, %5 = Qty. to Invoice, %6 = Quantity Shipped, %7 = Quantity Invoiced)';
     begin
         // String := StrSubstNo('%1 %2 %3\', Format(SalesHeader."Document Type"), SalesHeader."No.", SalesHeader."Document Date");
         SalesLine.SetRange("Document Type", SalesHeader."Document Type");
@@ -194,14 +196,15 @@ codeunit 50144 "Test Subscription App"
         if SalesLine.FindSet() then
             repeat
                 String := String +
-                    StrSubstNo('Line %1, Date %2, Qty %3, To Ship %4, To inv %5, Shipped %6, Invoiced %7\',
+                    StrSubstNo(StatusTxt,
                         SalesLine."Line No.",
                         Format(SalesLine."Shipment Date", 0, 9),
                         SalesLine.Quantity,
                         SalesLine."Qty. to Ship",
                         SalesLine."Qty. to Invoice",
                         SalesLine."Quantity Shipped",
-                        SalesLine."Quantity Invoiced");
+                        SalesLine."Quantity Invoiced") +
+                    '\';
             until SalesLine.Next() = 0;
         exit(String);
     end;

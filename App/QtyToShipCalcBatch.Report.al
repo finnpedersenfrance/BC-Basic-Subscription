@@ -21,8 +21,8 @@ report 50141 "Qty to Ship Calc Batch"
                 Counter := Counter + 1;
                 WindowDialog.Update(1, "No.");
                 WindowDialog.Update(2, ROUND(Counter / CounterTotal * 10000, 1));
-                Clear(FPFrSubscriptionManagement);
-                FPFrSubscriptionManagement.CalculateQuantityToShipOne("Sales Header");
+                Clear(SubscriptionManagement);
+                SubscriptionManagement.CalculateQuantityToShipOne("Sales Header");
                 CounterOK := CounterOK + 1;
                 if MarkedOnly then
                     Mark(false);
@@ -63,7 +63,7 @@ report 50141 "Qty to Ship Calc Batch"
     }
 
     var
-        FPFrSubscriptionManagement: Codeunit "Subscription Management";
+        SubscriptionManagement: Codeunit "Subscription Management";
         UpdatingBlanketOrdersLbl: label 'Updating Blanket Orders  #1########## @2@@@@@@@@@@@@@', Comment = '%1 = Order Number; %2 = Counter';
         CounterLbl: label '%1 blanket orders out of a total of %2 have now been evaluated.', Comment = '%1 = Counter; %2 = Counter Total';
         WindowDialog: Dialog;

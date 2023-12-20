@@ -20,9 +20,9 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
 
                     trigger OnAction()
                     var
-                        FPFrSubscriptionManagement: Codeunit "Subscription Management";
+                        SubscriptionManagement: Codeunit "Subscription Management";
                     begin
-                        FPFrSubscriptionManagement.CalculateQuantityToShipYN(Rec);
+                        SubscriptionManagement.CalculateQuantityToShipYN(Rec);
                     end;
                 }
                 action(MakeOrders)
@@ -34,9 +34,9 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
 
                     trigger OnAction()
                     var
-                        FPFrSubscriptionManagement: Codeunit "Subscription Management";
+                        SubscriptionManagement: Codeunit "Subscription Management";
                     begin
-                        FPFrSubscriptionManagement.MakeOrderYN(Rec);
+                        SubscriptionManagement.MakeOrderYN(Rec);
                     end;
                 }
                 action("Calculate Next Subscription Period")
@@ -48,9 +48,9 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
 
                     trigger OnAction()
                     var
-                        FPFrSubscriptionManagement: Codeunit "Subscription Management";
+                        SubscriptionManagement: Codeunit "Subscription Management";
                     begin
-                        FPFrSubscriptionManagement.CalculateNextSubscriptionPeriodYN(Rec);
+                        SubscriptionManagement.CalculateNextSubscriptionPeriodYN(Rec);
                     end;
                 }
             }
