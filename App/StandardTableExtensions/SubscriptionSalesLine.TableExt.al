@@ -1,12 +1,12 @@
 namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 
-using Microsoft.Inventory.Item;
+using Microsoft.Sales.Document;
 
-tableextension 50140 "FPFr Subscription Item" extends Item
+tableextension 50141 "Subscription Sales Line" extends "Sales Line"
 {
     fields
     {
-        field(50000; "Subscription Type"; Enum "FPFr Subscription Enum")
+        field(50000; "Subscription Type"; Enum "Subscription Enum")
         {
             Caption = 'Subscription Type';
 
@@ -26,6 +26,13 @@ tableextension 50140 "FPFr Subscription Item" extends Item
                 if not (CalcDate("Subscription Periodicity", WorkDate()) > WorkDate()) then
                     Error(DateFormulaErr, "Subscription Periodicity");
             end;
+        }
+
+        field(50002; OrderNumber; Code[20])
+        {
+            Editable = false;
+            DataClassification = ToBeClassified;
+
         }
 
     }

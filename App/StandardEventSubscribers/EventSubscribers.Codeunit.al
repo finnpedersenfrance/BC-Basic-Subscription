@@ -3,7 +3,7 @@ namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 using Microsoft.Sales.Document;
 using Microsoft.Sales.Posting;
 
-codeunit 50141 "FPFr Event Subscribers"
+codeunit 50141 "Event Subscribers"
 {
     EventSubscriberInstance = Manual;
 

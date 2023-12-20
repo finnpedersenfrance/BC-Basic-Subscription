@@ -4,14 +4,14 @@ using Microsoft.Inventory.Item;
 using Microsoft.Sales.Document;
 using FinnPedersenFrance.Tools.Library;
 
-codeunit 50144 "FPFr Test Subscription App"
+codeunit 50144 "Test Subscription App"
 {
     Subtype = Test;
 
     var
         StandardLibrary: Codeunit "Standard Library";
         Assert: Codeunit Assert;
-        FPFrEventSubscribers: Codeunit "FPFr Event Subscribers";
+        FPFrEventSubscribers: Codeunit "Event Subscribers";
 
 
 
@@ -23,7 +23,7 @@ codeunit 50144 "FPFr Test Subscription App"
     [Test]
     procedure TestXMLFormatEnum()
     var
-        FPFrSubscriptionEnum: Enum "FPFr Subscription Enum";
+        FPFrSubscriptionEnum: Enum "Subscription Enum";
 
     begin
         // [SCENARIO #001] Formating Enum
@@ -47,7 +47,7 @@ codeunit 50144 "FPFr Test Subscription App"
         SalesHeader: Record "Sales Header";
         SalesLine1: Record "Sales Line";
         SalesLine2: Record "Sales Line";
-        FPFrSubscriptionMgt: Codeunit "FPFr Subscription Management";
+        FPFrSubscriptionMgt: Codeunit "Subscription Management";
         DateExpression: DateFormula;
         ThisDay: Date;
         LineNumber: Integer;

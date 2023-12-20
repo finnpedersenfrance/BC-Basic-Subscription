@@ -2,7 +2,7 @@ namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 
 using Microsoft.Sales.Document;
 
-pageextension 50144 "FPFr Subscription Orders" extends "Blanket Sales Orders"
+pageextension 50144 "Subscription Orders" extends "Blanket Sales Orders"
 {
     actions
     {
@@ -17,7 +17,7 @@ pageextension 50144 "FPFr Subscription Orders" extends "Blanket Sales Orders"
                     Caption = 'Calculate Quantity to Ship';
                     ToolTip = 'Calculate Quantity to Ship';
                     Image = CalculatePlan;
-                    RunObject = Report "FPFr Qty to Ship Calc Batch";
+                    RunObject = Report "Qty to Ship Calc Batch";
                 }
                 action(MakeOrders)
                 {
@@ -25,7 +25,7 @@ pageextension 50144 "FPFr Subscription Orders" extends "Blanket Sales Orders"
                     Caption = 'Make Orders';
                     ToolTip = 'Make Orders';
                     Image = MakeOrder;
-                    RunObject = Report "FPFr Make Orders Batch";
+                    RunObject = Report "Make Orders Batch";
                 }
                 action(CalculateNextInvoicingPeriod)
                 {
@@ -33,7 +33,7 @@ pageextension 50144 "FPFr Subscription Orders" extends "Blanket Sales Orders"
                     Caption = 'Calculate Next Invoicing Period';
                     ToolTip = 'Calculate Next Invoicing Period';
                     Image = CalculatePlan;
-                    RunObject = Report "FPFr Next Periode Calc Batch";
+                    RunObject = Report "Next Periode Calc Batch";
                 }
             }
         }

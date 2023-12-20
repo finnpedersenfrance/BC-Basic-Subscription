@@ -2,9 +2,9 @@ namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 
 using Microsoft.Sales.Document;
 
-report 50141 "FPFr Qty to Ship Calc Batch"
+report 50142 "Make Orders Batch"
 {
-    Caption = 'Calculate Quantity to Ship';
+    Caption = 'Make Orders from Blanket Order Lines ready to ship';
     ProcessingOnly = true;
     UsageCategory = None;
 
@@ -21,11 +21,12 @@ report 50141 "FPFr Qty to Ship Calc Batch"
                 Counter := Counter + 1;
                 WindowDialog.Update(1, "No.");
                 WindowDialog.Update(2, ROUND(Counter / CounterTotal * 10000, 1));
-                Clear(FPFrSubscriptionManagement);
-                FPFrSubscriptionManagement.CalculateQuantityToShipOne("Sales Header");
-                CounterOK := CounterOK + 1;
-                if MarkedOnly then
-                    Mark(false);
+                Clear(BlanketSalesOrdertoOrder);
+                if BlanketSalesOrdertoOrder.Run("Sales Header") then begin
+                    CounterOK := CounterOK + 1;
+                    if MarkedOnly then
+                        Mark(false);
+                end;
             end;
 
             trigger OnPostDataItem()
@@ -63,7 +64,7 @@ report 50141 "FPFr Qty to Ship Calc Batch"
     }
 
     var
-        FPFrSubscriptionManagement: Codeunit "FPFr Subscription Management";
+        BlanketSalesOrdertoOrder: Codeunit "Blanket Sales Order to Order";
         UpdatingBlanketOrdersLbl: label 'Updating Blanket Orders  #1########## @2@@@@@@@@@@@@@', Comment = '%1 = Order Number; %2 = Counter';
         CounterLbl: label '%1 blanket orders out of a total of %2 have now been evaluated.', Comment = '%1 = Counter; %2 = Counter Total';
         WindowDialog: Dialog;
@@ -75,4 +76,3 @@ report 50141 "FPFr Qty to Ship Calc Batch"
     begin
     end;
 }
-

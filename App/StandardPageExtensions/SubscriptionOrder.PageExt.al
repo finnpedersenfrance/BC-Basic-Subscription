@@ -2,7 +2,7 @@ namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 
 using Microsoft.Sales.Document;
 
-pageextension 50143 "FPFr Subscription Order" extends "Blanket Sales Order"
+pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
 {
     actions
     {
@@ -20,7 +20,7 @@ pageextension 50143 "FPFr Subscription Order" extends "Blanket Sales Order"
 
                     trigger OnAction()
                     var
-                        FPFrSubscriptionManagement: Codeunit "FPFr Subscription Management";
+                        FPFrSubscriptionManagement: Codeunit "Subscription Management";
                     begin
                         FPFrSubscriptionManagement.CalculateQuantityToShipYN(Rec);
                     end;
@@ -34,7 +34,7 @@ pageextension 50143 "FPFr Subscription Order" extends "Blanket Sales Order"
 
                     trigger OnAction()
                     var
-                        FPFrSubscriptionManagement: Codeunit "FPFr Subscription Management";
+                        FPFrSubscriptionManagement: Codeunit "Subscription Management";
                     begin
                         FPFrSubscriptionManagement.MakeOrderYN(Rec);
                     end;
@@ -48,7 +48,7 @@ pageextension 50143 "FPFr Subscription Order" extends "Blanket Sales Order"
 
                     trigger OnAction()
                     var
-                        FPFrSubscriptionManagement: Codeunit "FPFr Subscription Management";
+                        FPFrSubscriptionManagement: Codeunit "Subscription Management";
                     begin
                         FPFrSubscriptionManagement.CalculateNextSubscriptionPeriodYN(Rec);
                     end;

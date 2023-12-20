@@ -3,7 +3,7 @@ namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 using Microsoft.Sales.Document;
 using Microsoft.Inventory.Item;
 
-codeunit 50140 "FPFr Subscription Management"
+codeunit 50140 "Subscription Management"
 {
     trigger OnRun()
     begin

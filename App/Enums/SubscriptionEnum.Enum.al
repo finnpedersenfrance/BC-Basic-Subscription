@@ -1,6 +1,6 @@
 namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 
-enum 50140 "FPFr Subscription Enum"
+enum 50140 "Subscription Enum"
 {
     Extensible = true;
 

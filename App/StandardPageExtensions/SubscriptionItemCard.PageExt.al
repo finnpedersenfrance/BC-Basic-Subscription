@@ -2,7 +2,7 @@ namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 
 using Microsoft.Inventory.Item;
 
-pageextension 50140 "FPFr Subscription Item Card" extends "Item Card"
+pageextension 50140 "Subscription Item Card" extends "Item Card"
 {
     layout
     {

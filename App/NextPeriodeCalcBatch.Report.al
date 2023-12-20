@@ -2,7 +2,7 @@ namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
 
 using Microsoft.Sales.Document;
 
-report 50140 "FPFr Next Periode Calc Batch"
+report 50140 "Next Periode Calc Batch"
 {
     Caption = 'Calculate Next Subscription Period';
     ProcessingOnly = true;
@@ -63,7 +63,7 @@ report 50140 "FPFr Next Periode Calc Batch"
     }
 
     var
-        FPFrSubscriptionManagement: Codeunit "FPFr Subscription Management";
+        FPFrSubscriptionManagement: Codeunit "Subscription Management";
         UpdatingBlanketOrdersLbl: label 'Updating Blanket Orders  #1########## @2@@@@@@@@@@@@@', Comment = '%1 = Order Number; %2 = Counter';
         CounterLbl: label '%1 blanket orders out of a total of %2 have now been evaluated.', Comment = '%1 = Counter; %2 = Counter Total';
         WindowDialog: Dialog;
