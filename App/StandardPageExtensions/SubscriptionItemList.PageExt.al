@@ -10,14 +10,14 @@ pageextension 50141 "Subscription Item List" extends "Item List"
         {
             field("Subscription Type"; Rec."Subscription Type")
             {
-                ToolTip = 'Subscription Type';
                 ApplicationArea = All;
+                ToolTip = 'Subscription Type';
             }
 
             field("Subscription Periodicity"; Rec."Subscription Periodicity")
             {
-                ToolTip = 'Subscription Periodicity';
                 ApplicationArea = All;
+                ToolTip = 'Subscription Periodicity';
             }
         }
     }

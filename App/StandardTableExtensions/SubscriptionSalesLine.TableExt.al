@@ -16,9 +16,9 @@ tableextension 50141 "Subscription Sales Line" extends "Sales Line"
                     Clear("Subscription Periodicity");
             end;
         }
-
         field(50001; "Subscription Periodicity"; DateFormula)
         {
+            Caption = 'Subscription Periodicity';
             trigger OnValidate()
             var
                 DateFormulaErr: TextConst ENU = 'The Date Formula %1 will not calculate a date in the future. Please enter a correct Date Formula.';
@@ -27,14 +27,11 @@ tableextension 50141 "Subscription Sales Line" extends "Sales Line"
                     Error(DateFormulaErr, "Subscription Periodicity");
             end;
         }
-
         field(50002; OrderNumber; Code[20])
         {
-            Editable = false;
+            Caption = 'OrderNumber';
             DataClassification = ToBeClassified;
-
+            Editable = false;
         }
-
     }
 }
-

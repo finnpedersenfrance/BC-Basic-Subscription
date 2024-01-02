@@ -66,5 +66,4 @@ codeunit 50141 "Event Subscribers"
     begin
         IsHandled := true;
     end;
-
 }

@@ -4,6 +4,7 @@ using Microsoft.Sales.Document;
 
 report 50140 "Next Periode Calc Batch"
 {
+    ApplicationArea = All;
     Caption = 'Calculate Next Subscription Period';
     ProcessingOnly = true;
     UsageCategory = None;
@@ -20,7 +21,7 @@ report 50140 "Next Periode Calc Batch"
             begin
                 Counter := Counter + 1;
                 WindowDialog.Update(1, "No.");
-                WindowDialog.Update(2, ROUND(Counter / CounterTotal * 10000, 1));
+                WindowDialog.Update(2, Round(Counter / CounterTotal * 10000, 1));
                 Clear(SubscriptionManagement);
                 SubscriptionManagement.CalculateNextSubscriptionPeriodOne("Sales Header");
                 CounterOK := CounterOK + 1;
@@ -46,33 +47,22 @@ report 50140 "Next Periode Calc Batch"
     {
         SaveValues = true;
 
-        layout
-        {
-            area(content)
-            {
-            }
-        }
+        actions { }
 
-        actions
-        {
-        }
     }
 
-    labels
-    {
-    }
+    labels { }
 
     var
         SubscriptionManagement: Codeunit "Subscription Management";
-        UpdatingBlanketOrdersLbl: label 'Updating Blanket Orders  #1########## @2@@@@@@@@@@@@@', Comment = '%1 = Order Number; %2 = Counter';
-        CounterLbl: label '%1 blanket orders out of a total of %2 have now been evaluated.', Comment = '%1 = Counter; %2 = Counter Total';
         WindowDialog: Dialog;
-        CounterTotal: Integer;
         Counter: Integer;
         CounterOK: Integer;
+        CounterTotal: Integer;
+        CounterLbl: Label '%1 blanket orders out of a total of %2 have now been evaluated.', Comment = '%1 = Counter; %2 = Counter Total';
+        UpdatingBlanketOrdersLbl: Label 'Updating Blanket Orders  #1########## @2@@@@@@@@@@@@@', Comment = '%1 = Order Number; %2 = Counter';
 
     procedure InitializeRequest()
     begin
     end;
 }
-

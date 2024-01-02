@@ -9,11 +9,9 @@ codeunit 50144 "Test Subscription App"
     Subtype = Test;
 
     var
-        StandardLibrary: Codeunit "Standard Library";
         Assert: Codeunit Assert;
         EventSubscribers: Codeunit "Event Subscribers";
-
-
+        StandardLibrary: Codeunit "Standard Library";
 
     trigger OnRun()
     begin
@@ -36,7 +34,6 @@ codeunit 50144 "Test Subscription App"
         Assert.AreEqual('2', StandardLibrary.XMLFormat(SubscriptionEnum::Stop), '');
     end;
 
-
     [Test]
     [HandlerFunctions('ConfirmHandler,MessageHandler')]
 
@@ -49,10 +46,10 @@ codeunit 50144 "Test Subscription App"
         SalesLine2: Record "Sales Line";
         SubscriptionManagement: Codeunit "Subscription Management";
         DateExpression: DateFormula;
-        ThisDay: Date;
-        LineNumber: Integer;
-        Counter: Integer;
         DebuggingMode: Boolean;
+        ThisDay: Date;
+        Counter: Integer;
+        LineNumber: Integer;
         BlanketOrderStatus: Text;
 
     begin
@@ -99,7 +96,6 @@ codeunit 50144 "Test Subscription App"
         SalesHeader.Validate("External Document No.", '123456');
         SalesHeader.Modify(true);
         BlanketOrderStatus := SalesHeaderStatus(SalesHeader);
-
 
         SalesLine1.Init();
         SalesLine1.Validate("Document Type", SalesHeader."Document Type");
@@ -186,9 +182,9 @@ codeunit 50144 "Test Subscription App"
     procedure SalesHeaderStatus(SalesHeader: Record "Sales Header"): Text
     var
         SalesLine: Record "Sales Line";
-        String: Text;
         StatusTxt: Label 'Line %1, Date %2, Qty %3, To Ship %4, To inv %5, Shipped %6, Invoiced %7',
                Comment = '%1 = Line No., %2 = Date, %3 = Quantity, %4 = Qty. to Ship, %5 = Qty. to Invoice, %6 = Quantity Shipped, %7 = Quantity Invoiced)';
+        String: Text;
     begin
         // String := StrSubstNo('%1 %2 %3\', Format(SalesHeader."Document Type"), SalesHeader."No.", SalesHeader."Document Date");
         SalesLine.SetRange("Document Type", SalesHeader."Document Type");
@@ -219,5 +215,4 @@ codeunit 50144 "Test Subscription App"
     procedure MessageHandler(MessageText: Text[1024])
     begin
     end;
-
 }

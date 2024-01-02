@@ -16,9 +16,9 @@ tableextension 50140 "Subscription Item" extends Item
                     Clear("Subscription Periodicity");
             end;
         }
-
         field(50001; "Subscription Periodicity"; DateFormula)
         {
+            Caption = 'Subscription Periodicity';
             trigger OnValidate()
             var
                 DateFormulaErr: TextConst ENU = 'The Date Formula %1 will not calculate a date in the future. Please enter a correct Date Formula.';
@@ -27,7 +27,5 @@ tableextension 50140 "Subscription Item" extends Item
                     Error(DateFormulaErr, "Subscription Periodicity");
             end;
         }
-
     }
 }
-
