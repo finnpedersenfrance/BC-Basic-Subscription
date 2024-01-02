@@ -47,8 +47,6 @@ report 50141 "Qty To Ship Calc Batch"
     {
         SaveValues = true;
 
-        actions { }
-
     }
 
     labels { }

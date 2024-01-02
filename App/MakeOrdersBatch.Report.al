@@ -48,8 +48,6 @@ report 50142 "Make Orders Batch"
     {
         SaveValues = true;
 
-        actions { }
-
     }
 
     labels { }

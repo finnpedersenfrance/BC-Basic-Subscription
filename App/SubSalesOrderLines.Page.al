@@ -97,5 +97,4 @@ page 50140 "Sub. Sales Order Lines"
             }
         }
     }
-
 }

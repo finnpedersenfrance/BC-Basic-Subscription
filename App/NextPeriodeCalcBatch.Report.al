@@ -47,8 +47,6 @@ report 50140 "Next Periode Calc Batch"
     {
         SaveValues = true;
 
-        actions { }
-
     }
 
     labels { }

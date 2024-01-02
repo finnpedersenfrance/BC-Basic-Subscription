@@ -5,8 +5,6 @@ using Microsoft.Inventory.Item;
 
 codeunit 50140 "Subscription Management"
 {
-
-
     [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnAfterCopyFromItem', '', true, true)]
     local procedure SubscriptionOnAfterCopyFromItem(var SalesLine: Record "Sales Line"; Item: Record Item)
     begin
