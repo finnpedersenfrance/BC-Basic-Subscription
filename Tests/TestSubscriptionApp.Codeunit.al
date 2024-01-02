@@ -63,7 +63,7 @@ codeunit 50144 "Test Subscription App"
         ThisDay := DMY2Date(1, 1, 2024);
         WorkDate(ThisDay);
 
-        Item1.FindFirst();
+        Item1.Get('1960-S');
         Item1.Validate("Subscription Type", Item1."Subscription Type"::Recurring);
         Evaluate(DateExpression, '<1D>');
         Assert.AreEqual('1D', Format(DateExpression), 'Test evaluate of <1D>.');
@@ -82,8 +82,7 @@ codeunit 50144 "Test Subscription App"
         Item1.Validate("Subscription Periodicity", DateExpression);
         Item1.Modify(true);
 
-        Item2.FindSet();
-        Item2.Next();
+        Item2.Get('1900-S');
         Item2.Validate("Subscription Type", Item2."Subscription Type"::Recurring);
         Evaluate(DateExpression, '<1D>');
         Assert.AreEqual('1D', Format(DateExpression), 'Test evaluate of <1D>.');
