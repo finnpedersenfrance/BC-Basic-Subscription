@@ -13,10 +13,10 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
                 Caption = 'Subscription';
                 action("Calculate Quantity to Ship")
                 {
-                    ToolTip = 'Calculate Quantity to Ship';
                     ApplicationArea = All;
                     Caption = 'Calculate Quantity to Ship';
                     Image = CalculatePlan;
+                    ToolTip = 'Calculate Quantity to Ship';
 
                     trigger OnAction()
                     var
@@ -27,10 +27,10 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
                 }
                 action(MakeOrders)
                 {
-                    ToolTip = 'Make Orders';
                     ApplicationArea = All;
                     Caption = 'Make Order';
                     Image = MakeOrder;
+                    ToolTip = 'Make Orders';
 
                     trigger OnAction()
                     var
@@ -41,10 +41,10 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
                 }
                 action("Calculate Next Subscription Period")
                 {
-                    ToolTip = 'Calculate Next Subscription Period';
                     ApplicationArea = All;
                     Caption = 'Calculate Next Subscription Period';
                     Image = CalculatePlan;
+                    ToolTip = 'Calculate Next Subscription Period';
 
                     trigger OnAction()
                     var

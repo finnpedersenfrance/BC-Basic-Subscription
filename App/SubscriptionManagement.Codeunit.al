@@ -5,10 +5,7 @@ using Microsoft.Inventory.Item;
 
 codeunit 50140 "Subscription Management"
 {
-    trigger OnRun()
-    begin
 
-    end;
 
     [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnAfterCopyFromItem', '', true, true)]
     local procedure SubscriptionOnAfterCopyFromItem(var SalesLine: Record "Sales Line"; Item: Record Item)
@@ -16,7 +13,6 @@ codeunit 50140 "Subscription Management"
         SalesLine."Subscription Type" := Item."Subscription Type";
         SalesLine."Subscription Periodicity" := Item."Subscription Periodicity";
     end;
-
 
     procedure MakeOrderYN(SalesHeader: Record "Sales Header")
     var
@@ -28,8 +24,8 @@ codeunit 50140 "Subscription Management"
 
     procedure CalculateQuantityToShipYN(SalesHeader: Record "Sales Header")
     var
-        ConfirmMsg: TextConst ENU = 'Do you want to calculate the Quantity to Ship?';
         CalculatedMsg: TextConst ENU = 'Quantity to Ship was calculated.';
+        ConfirmMsg: TextConst ENU = 'Do you want to calculate the Quantity to Ship?';
 
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");
@@ -59,8 +55,8 @@ codeunit 50140 "Subscription Management"
 
     procedure CalculateNextSubscriptionPeriodYN(SalesHeader: Record "Sales Header")
     var
-        ConfirmMsg: TextConst ENU = 'Do you want to calculate the next Subscription periodes?';
         CalculatedMsg: TextConst ENU = 'Next Subscription periods have been calculated.';
+        ConfirmMsg: TextConst ENU = 'Do you want to calculate the next Subscription periodes?';
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");
         if Confirm(ConfirmMsg, false) then begin
@@ -72,8 +68,8 @@ codeunit 50140 "Subscription Management"
     procedure CalculateNextSubscriptionPeriodOne(SalesHeader: Record "Sales Header")
     var
         BlanketOrderSalesLine: Record "Sales Line";
-        NewBlanketOrderSalesLine: Record "Sales Line";
         ExistsBlanketOrderSalesLine: Record "Sales Line";
+        NewBlanketOrderSalesLine: Record "Sales Line";
 
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");

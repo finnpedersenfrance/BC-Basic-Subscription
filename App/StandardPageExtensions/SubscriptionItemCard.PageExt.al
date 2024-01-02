@@ -10,16 +10,15 @@ pageextension 50140 "Subscription Item Card" extends "Item Card"
         {
             group(Subscription)
             {
-                field("Subscription type"; Rec."Subscription type")
+                field("Subscription type"; Rec."Subscription Type")
                 {
-                    ToolTip = 'Subscription Type';
                     ApplicationArea = All;
+                    ToolTip = 'Subscription Type';
                 }
-
                 field("Subscription Periodicity"; Rec."Subscription Periodicity")
                 {
-                    ToolTip = 'Subscription Periodicity';
                     ApplicationArea = All;
+                    ToolTip = 'Subscription Periodicity';
                 }
             }
         }

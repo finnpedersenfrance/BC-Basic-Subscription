@@ -6,12 +6,13 @@ enum 50140 "Subscription Enum"
 
     value(0; " ")
     {
+        Caption = ' ';
     }
-    value(1; "Recurring")
+    value(1; Recurring)
     {
         Caption = 'Recurring';
     }
-    value(2; "Stop")
+    value(2; Stop)
     {
         Caption = 'Stop';
     }

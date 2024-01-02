@@ -15,28 +15,27 @@ pageextension 50144 "Subscription Orders" extends "Blanket Sales Orders"
                 {
                     ApplicationArea = All;
                     Caption = 'Calculate Quantity to Ship';
-                    ToolTip = 'Calculate Quantity to Ship';
                     Image = CalculatePlan;
-                    RunObject = Report "Qty to Ship Calc Batch";
+                    RunObject = report "Qty To Ship Calc Batch";
+                    ToolTip = 'Calculate Quantity to Ship';
                 }
                 action(MakeOrders)
                 {
                     ApplicationArea = All;
                     Caption = 'Make Orders';
-                    ToolTip = 'Make Orders';
                     Image = MakeOrder;
-                    RunObject = Report "Make Orders Batch";
+                    RunObject = report "Make Orders Batch";
+                    ToolTip = 'Make Orders';
                 }
                 action(CalculateNextInvoicingPeriod)
                 {
                     ApplicationArea = All;
                     Caption = 'Calculate Next Invoicing Period';
-                    ToolTip = 'Calculate Next Invoicing Period';
                     Image = CalculatePlan;
-                    RunObject = Report "Next Periode Calc Batch";
+                    RunObject = report "Next Periode Calc Batch";
+                    ToolTip = 'Calculate Next Invoicing Period';
                 }
             }
         }
     }
 }
-
