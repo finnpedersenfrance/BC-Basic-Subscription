@@ -47,7 +47,6 @@ report 50142 "Make Orders Batch"
     requestpage
     {
         SaveValues = true;
-
     }
 
     labels { }

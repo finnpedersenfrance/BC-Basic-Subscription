@@ -46,7 +46,6 @@ report 50140 "Next Periode Calc Batch"
     requestpage
     {
         SaveValues = true;
-
     }
 
     labels { }
