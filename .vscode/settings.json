@@ -1,8 +1,4 @@
 {
-    "cSpell.words": [
-        "Pedersen"
-    ],
-    "al-xml-doc.InitializeALObjectCacheOnStartUp": false,
     "al.enableCodeAnalysis": true,
     "al.codeAnalyzers": [
         "${CodeCop}",
