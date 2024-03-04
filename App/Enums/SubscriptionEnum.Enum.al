@@ -1,4 +1,4 @@
-namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+namespace FinnPedersenFrance.BasicSubscriptionManagement;
 
 enum 50140 "Subscription Enum"
 {

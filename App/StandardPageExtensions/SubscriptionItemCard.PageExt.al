@@ -1,4 +1,4 @@
-namespace FinnPedersenFrance.App.BasicSubscriptionManagement;
+namespace FinnPedersenFrance.BasicSubscriptionManagement;
 
 using Microsoft.Inventory.Item;
 
