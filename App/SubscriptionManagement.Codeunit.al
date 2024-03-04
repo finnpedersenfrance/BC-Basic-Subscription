@@ -5,7 +5,7 @@ using Microsoft.Inventory.Item;
 
 codeunit 50140 "Subscription Management"
 {
-    [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnAfterCopyFromItem', '', true, true)]
+    [EventSubscriber(ObjectType::Table, Database::"Sales Line", OnAfterCopyFromItem, '', true, true)]
     local procedure SubscriptionOnAfterCopyFromItem(var SalesLine: Record "Sales Line"; Item: Record Item)
     begin
         SalesLine."Subscription Type" := Item."Subscription Type";
@@ -108,7 +108,7 @@ codeunit 50140 "Subscription Management"
             until BlanketOrderSalesLine.Next() = 0;
     end;
 
-    procedure GetNextLineNumber(SalesHeader: Record "Sales Header"): Integer;
+    procedure GetNextLineNumber(SalesHeader: Record "Sales Header"): Integer
     var
         SalesLine: Record "Sales Line";
         NextLineNumber: Integer;
