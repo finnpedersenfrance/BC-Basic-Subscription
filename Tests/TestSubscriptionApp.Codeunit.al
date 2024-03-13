@@ -204,6 +204,7 @@ codeunit 50144 "Test Subscription App"
         exit(String);
     end;
 
+#pragma warning disable CM0030 // Remove unused variables
     [ConfirmHandler]
     procedure ConfirmHandler(Question: Text[1024]; var Reply: Boolean)
     begin
@@ -214,4 +215,5 @@ codeunit 50144 "Test Subscription App"
     procedure MessageHandler(MessageText: Text[1024])
     begin
     end;
+#pragma warning restore CM0030 // Remove unused variables
 }

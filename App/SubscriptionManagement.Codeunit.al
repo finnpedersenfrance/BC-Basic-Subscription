@@ -2,6 +2,7 @@ namespace FinnPedersenFrance.BasicSubscriptionManagement;
 
 using Microsoft.Sales.Document;
 using Microsoft.Inventory.Item;
+using System.Utilities;
 
 codeunit 50140 "Subscription Management"
 {
@@ -22,12 +23,12 @@ codeunit 50140 "Subscription Management"
 
     procedure CalculateQuantityToShipYN(SalesHeader: Record "Sales Header")
     var
+        ConfirmManagement: Codeunit "Confirm Management";
         CalculatedMsg: TextConst ENU = 'Quantity to Ship was calculated.';
         ConfirmMsg: TextConst ENU = 'Do you want to calculate the Quantity to Ship?';
-
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");
-        if Confirm(ConfirmMsg, false) then begin
+        if ConfirmManagement.GetResponse(ConfirmMsg, false) then begin
             CalculateQuantityToShipOne(SalesHeader);
             Message(CalculatedMsg);
         end;
@@ -53,11 +54,12 @@ codeunit 50140 "Subscription Management"
 
     procedure CalculateNextSubscriptionPeriodYN(SalesHeader: Record "Sales Header")
     var
+        ConfirmManagement: Codeunit "Confirm Management";
         CalculatedMsg: TextConst ENU = 'Next Subscription periods have been calculated.';
         ConfirmMsg: TextConst ENU = 'Do you want to calculate the next Subscription periodes?';
     begin
         SalesHeader.TestField("Document Type", SalesHeader."Document Type"::"Blanket Order");
-        if Confirm(ConfirmMsg, false) then begin
+        if ConfirmManagement.GetResponse(ConfirmMsg, false) then begin
             CalculateNextSubscriptionPeriodOne(SalesHeader);
             Message(CalculatedMsg);
         end;

@@ -6,21 +6,20 @@
         "${UICop}",
         "${PerTenantExtensionCop}",
         "${analyzerFolder}BusinessCentral.LinterCop.dll",
+        "${analyzerFolder}CompanialCopAnalyzer.dll",
     ],
     "al.backgroundCodeAnalysis": "Project",
     "al.browser": "Edge",
     "al.ruleSetPath": "./.vscode/Main.ruleset.json",
-    "editor.codeActionsOnSave": {
-        "source.fixAll.al": "explicit"
-    },
-    "xml.validation.namespaces.enabled": "onNamespaceEncountered",
-    "xml.validation.schema.enabled": "onValidSchema",
     "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.ExtensionObjectNamePattern": "",
     "CRS.AlSubFolderName": "None",
     "CRS.OnSaveAlFileAction": "Rename",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.al": "explicit"
+    },
     "alOutline.codeActionsOnSave": [
         "SortCustomizations",
         "SortPermissionSetList",
@@ -75,4 +74,6 @@
         "removeActions": true,
         "ignoreComments": false
     },
+    "xml.validation.namespaces.enabled": "onNamespaceEncountered",
+    "xml.validation.schema.enabled": "onValidSchema",
 }
