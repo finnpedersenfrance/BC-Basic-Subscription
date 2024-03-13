@@ -6,7 +6,7 @@ enum 50140 "Subscription Enum"
 
     value(0; " ")
     {
-        Caption = ' ';
+        Caption = ' ', Locked = true;
     }
     value(1; Recurring)
     {

@@ -29,6 +29,7 @@ tableextension 50141 "Subscription Sales Line" extends "Sales Line"
         }
         field(50002; OrderNumber; Code[20])
         {
+            AllowInCustomizations = Always;
             Caption = 'OrderNumber';
             DataClassification = ToBeClassified;
             Editable = false;

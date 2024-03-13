@@ -17,7 +17,7 @@ pageextension 50144 "Subscription Orders" extends "Blanket Sales Orders"
                     Caption = 'Calculate Quantity to Ship';
                     Image = CalculatePlan;
                     RunObject = report "Qty To Ship Calc Batch";
-                    ToolTip = 'Calculate Quantity to Ship';
+                    ToolTip = 'Calculate Quantity to Ship.';
                 }
                 action(MakeOrders)
                 {
@@ -25,7 +25,7 @@ pageextension 50144 "Subscription Orders" extends "Blanket Sales Orders"
                     Caption = 'Make Orders';
                     Image = MakeOrder;
                     RunObject = report "Make Orders Batch";
-                    ToolTip = 'Make Orders';
+                    ToolTip = 'Make Orders.';
                 }
                 action(CalculateNextInvoicingPeriod)
                 {
@@ -33,7 +33,7 @@ pageextension 50144 "Subscription Orders" extends "Blanket Sales Orders"
                     Caption = 'Calculate Next Invoicing Period';
                     Image = CalculatePlan;
                     RunObject = report "Next Periode Calc Batch";
-                    ToolTip = 'Calculate Next Invoicing Period';
+                    ToolTip = 'Calculate Next Invoicing Period.';
                 }
             }
         }

@@ -11,13 +11,13 @@ pageextension 50142 "Sub. Order Subform" extends "Blanket Sales Order Subform"
             field("Subscription Type"; Rec."Subscription Type")
             {
                 ApplicationArea = All;
-                ToolTip = 'Subscription Type';
+                ToolTip = 'Specifies the Subscription Type.';
             }
 
             field("Subscription Periodicity"; Rec."Subscription Periodicity")
             {
                 ApplicationArea = All;
-                ToolTip = 'Subscription Periodicity';
+                ToolTip = 'Specifies the Subscription Periodicity.';
             }
         }
     }

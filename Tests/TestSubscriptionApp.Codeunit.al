@@ -174,7 +174,7 @@ codeunit 50144 "Test Subscription App"
                 SalesLine."Qty. to Ship" := 0;
                 SalesLine."Quantity Shipped" := SalesLine.Quantity;
                 SalesLine."Quantity Invoiced" := SalesLine.Quantity;
-                SalesLine.Modify();
+                SalesLine.Modify(false);
             until SalesLine.Next() = 0;
     end;
 
@@ -205,7 +205,7 @@ codeunit 50144 "Test Subscription App"
     end;
 
     [ConfirmHandler]
-    procedure ConfirmHandler(Question: Text[1024]; var Reply: Boolean);
+    procedure ConfirmHandler(Question: Text[1024]; var Reply: Boolean)
     begin
         Reply := true;
     end;

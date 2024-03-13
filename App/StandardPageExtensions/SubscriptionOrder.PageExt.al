@@ -16,7 +16,7 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
                     ApplicationArea = All;
                     Caption = 'Calculate Quantity to Ship';
                     Image = CalculatePlan;
-                    ToolTip = 'Calculate Quantity to Ship';
+                    ToolTip = 'Specifies the Calculate Quantity to Ship.';
 
                     trigger OnAction()
                     var
@@ -30,7 +30,7 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
                     ApplicationArea = All;
                     Caption = 'Make Order';
                     Image = MakeOrder;
-                    ToolTip = 'Make Orders';
+                    ToolTip = 'Make Orders from the Subscription Lines.';
 
                     trigger OnAction()
                     var
@@ -44,7 +44,7 @@ pageextension 50143 "Subscription Order" extends "Blanket Sales Order"
                     ApplicationArea = All;
                     Caption = 'Calculate Next Subscription Period';
                     Image = CalculatePlan;
-                    ToolTip = 'Calculate Next Subscription Period';
+                    ToolTip = 'Calculate Next Subscription Period.';
 
                     trigger OnAction()
                     var
